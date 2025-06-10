@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->text('description');
-            $table->decimal('price', 10, 2); // Angka desimal untuk harga
-            $table->string('image_url'); // Untuk menyimpan URL gambar produk
+            $table->decimal('price', 10, 2); 
+            $table->string('image_url'); 
             $table->timestamps();
         });
     }
