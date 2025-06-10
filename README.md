@@ -10,7 +10,8 @@
 
 ## About This Project
 
-Project ini merupakan tugas akhir dari organinasi BNCC dimana diminta untuk membuat sebuah website E Commerce berfokus pada Back-End nya
+Project ini merupakan tugas akhir dari organinasi BNCC dimana diminta untuk membuat sebuah website E Commerce berfokus pada Back-End nya. Pada Web ini, terdapat 2 role, yaitu admin dan customer.
+Customer dapat masuk ke dalam halaman utama web dan melihat produk apa saja yang sedang dijual. Kemudian Admin dapat melihat halaman utama juga serta memiliki halaman web khusus admin, dimana admin dapat melihat produk yang sedang dijual serta menambahkan produk baru ke dalam web.
 
 ## Meet Our Team🧑‍🤝‍🧑!
 
