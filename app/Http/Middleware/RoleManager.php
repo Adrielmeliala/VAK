@@ -13,45 +13,24 @@ class RoleManager
      * Handle an incoming request.
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
+     * @param  string $role  // Ini adalah parameter yang kita terima dari route (contoh: '1' atau '2')
      */
-    public function handle(Request $request, Closure $next, $role): Response
+    public function handle(Request $request, Closure $next, string $role): Response
     {
-        if(!Auth::check()){
-            return redirect()->route('login');
+        // Cek jika user tidak login, arahkan ke halaman login
+        if (!Auth::check()) {
+            return redirect('login');
         }
 
-        if (Auth::user()->role == 0) { // Asumsi role admin adalah 0
-            return $next($request);
+        // Cek jika role user tidak sesuai dengan role yang diizinkan dari route
+        // Kita menggunakan '==' karena role di DB dan di route adalah integer/string
+        if ($request->user()->role != $role) {
+            // Jika tidak sesuai, batalkan request dengan error 403 (Forbidden)
+            // Anda bisa juga redirect ke halaman lain jika mau.
+            abort(403, 'AKSI TIDAK DIIZINKAN.');
         }
 
-        $authUserRole = Auth::user()->role;
-
-        switch($role){
-            case 'admin':
-                if($authUserRole == 0){
-                    return $next($request);
-                }
-                break;
-            
-            case 'customer':
-                if($authUserRole == 1){
-                    return $next($request);
-                }
-                break;
-        }
-        abort(403, 'Unauthorized Action');
-
-        switch($authUserRole){
-            case 0:
-                return redirect()->route('admin');
-
-            case 1:
-                return redirect()->route('user');
-        }
-
-        return redirect()->route('login');
-
+        // Jika user login dan rolenya sesuai, lanjutkan ke request berikutnya
+        return $next($request);
     }
-
-    
 }
